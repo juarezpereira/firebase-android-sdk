@@ -35,29 +35,36 @@ public class BindingWrapperFactory {
   }
 
   public BindingWrapper createImageBindingWrapper(
-      InAppMessageLayoutConfig config, InAppMessage inAppMessage) {
-    InAppMessageComponent inAppMessageComponent =
-        DaggerInAppMessageComponent.builder()
+      InAppMessageLayoutConfig config,
+      InAppMessage inAppMessage
+  ) {
+    InAppMessageComponent inAppMessageComponent = DaggerInAppMessageComponent.builder()
             .inflaterModule(new InflaterModule(inAppMessage, config, application))
             .build();
+
     return inAppMessageComponent.imageBindingWrapper();
   }
 
   public BindingWrapper createModalBindingWrapper(
-      InAppMessageLayoutConfig config, InAppMessage inAppMessage) {
-    InAppMessageComponent inAppMessageComponent =
-        DaggerInAppMessageComponent.builder()
+      InAppMessageLayoutConfig config,
+      InAppMessage inAppMessage
+  ) {
+    InAppMessageComponent inAppMessageComponent = DaggerInAppMessageComponent.builder()
             .inflaterModule(new InflaterModule(inAppMessage, config, application))
             .build();
-    return inAppMessageComponent.modalBindingWrapper();
+
+    return inAppMessageComponent.customModalBindingWrapper();
   }
 
   public BindingWrapper createBannerBindingWrapper(
-      InAppMessageLayoutConfig config, InAppMessage inAppMessage) {
-    InAppMessageComponent inAppMessageComponent =
-        DaggerInAppMessageComponent.builder()
+      InAppMessageLayoutConfig config,
+      InAppMessage inAppMessage
+  ) {
+    InAppMessageComponent inAppMessageComponent = DaggerInAppMessageComponent.builder()
             .inflaterModule(new InflaterModule(inAppMessage, config, application))
             .build();
+
     return inAppMessageComponent.bannerBindingWrapper();
   }
+
 }

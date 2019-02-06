@@ -15,6 +15,7 @@
 package com.google.firebase.inappmessaging.display.internal.injection.components;
 
 import com.google.firebase.inappmessaging.display.internal.bindingwrappers.BannerBindingWrapper;
+import com.google.firebase.inappmessaging.display.internal.bindingwrappers.CustomModalBindingWrapper;
 import com.google.firebase.inappmessaging.display.internal.bindingwrappers.ImageBindingWrapper;
 import com.google.firebase.inappmessaging.display.internal.bindingwrappers.ModalBindingWrapper;
 import com.google.firebase.inappmessaging.display.internal.injection.modules.InflaterModule;
@@ -25,6 +26,7 @@ import dagger.Component;
 @InAppMessageScope
 @Component(modules = {InflaterModule.class})
 public interface InAppMessageComponent {
+
   @InAppMessageScope
   ImageBindingWrapper imageBindingWrapper();
 
@@ -32,5 +34,9 @@ public interface InAppMessageComponent {
   ModalBindingWrapper modalBindingWrapper();
 
   @InAppMessageScope
+  CustomModalBindingWrapper customModalBindingWrapper();
+
+  @InAppMessageScope
   BannerBindingWrapper bannerBindingWrapper();
+
 }

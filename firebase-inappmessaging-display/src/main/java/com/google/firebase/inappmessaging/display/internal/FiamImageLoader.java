@@ -29,40 +29,43 @@ import javax.inject.Inject;
  */
 @FirebaseAppScope
 public class FiamImageLoader {
-  private final Picasso picasso;
 
-  @Inject
-  FiamImageLoader(Picasso picasso) {
-    this.picasso = picasso;
-  }
+    private final Picasso picasso;
 
-  public FiamImageRequestCreator load(@Nullable String imageUrl) {
-    return new FiamImageRequestCreator(picasso.load(imageUrl));
-  }
-
-  public void cancelTag(Class c) {
-    picasso.cancelTag(c);
-  }
-
-  public static class FiamImageRequestCreator {
-    private final RequestCreator mRequestCreator;
-
-    public FiamImageRequestCreator(RequestCreator requestCreator) {
-      mRequestCreator = requestCreator;
+    @Inject
+    FiamImageLoader(Picasso picasso) {
+        this.picasso = picasso;
     }
 
-    public FiamImageRequestCreator placeholder(int placeholderResId) {
-      mRequestCreator.placeholder(placeholderResId);
-      return this;
+    public FiamImageRequestCreator load(@Nullable String imageUrl) {
+        final RequestCreator creator = picasso.load(imageUrl).transform(new CircleTransform());
+        return new FiamImageRequestCreator(creator);
     }
 
-    public FiamImageRequestCreator tag(Class c) {
-      mRequestCreator.tag(c);
-      return this;
+    public void cancelTag(Class c) {
+        picasso.cancelTag(c);
     }
 
-    public void into(ImageView imageView, Callback callback) {
-      mRequestCreator.into(imageView, callback);
+    public static class FiamImageRequestCreator {
+        private final RequestCreator mRequestCreator;
+
+        public FiamImageRequestCreator(RequestCreator requestCreator) {
+            mRequestCreator = requestCreator;
+        }
+
+        public FiamImageRequestCreator placeholder(int placeholderResId) {
+            mRequestCreator.placeholder(placeholderResId);
+            return this;
+        }
+
+        public FiamImageRequestCreator tag(Class c) {
+            mRequestCreator.tag(c);
+            return this;
+        }
+
+        public void into(ImageView imageView, Callback callback) {
+            mRequestCreator.into(imageView, callback);
+        }
     }
-  }
+
 }
