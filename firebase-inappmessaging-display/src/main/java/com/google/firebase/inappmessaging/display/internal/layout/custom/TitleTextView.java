@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 
 import com.google.firebase.inappmessaging.display.R;
+import com.google.firebase.inappmessaging.display.internal.Logging;
 
 public class TitleTextView extends AppCompatTextView {
 
@@ -34,7 +35,7 @@ public class TitleTextView extends AppCompatTextView {
       Typeface face = Typeface.createFromAsset(context.getAssets(), "fonts/MavenPro-Medium.ttf");
       setTypeface(face);
     } catch (Exception e) {
-      e.printStackTrace();
+      Logging.loge(e.getMessage());
     }
   }
 }

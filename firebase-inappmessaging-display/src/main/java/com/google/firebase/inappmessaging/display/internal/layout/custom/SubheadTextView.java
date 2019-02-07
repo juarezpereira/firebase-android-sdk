@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 
 import com.google.firebase.inappmessaging.display.R;
+import com.google.firebase.inappmessaging.display.internal.Logging;
 
 public class SubheadTextView extends AppCompatTextView {
 
@@ -33,7 +34,7 @@ public class SubheadTextView extends AppCompatTextView {
       Typeface face = Typeface.createFromAsset(context.getAssets(), "fonts/NotoSans-Regular.ttf");
       setTypeface(face);
     } catch (Exception e) {
-      e.printStackTrace();
+      Logging.loge(e.getMessage());
     }
   }
 }
