@@ -20,6 +20,7 @@ import com.google.firebase.inappmessaging.display.internal.injection.components.
 import com.google.firebase.inappmessaging.display.internal.injection.components.InAppMessageComponent;
 import com.google.firebase.inappmessaging.display.internal.injection.modules.InflaterModule;
 import com.google.firebase.inappmessaging.model.InAppMessage;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -35,10 +36,9 @@ public class BindingWrapperFactory {
   }
 
   public BindingWrapper createImageBindingWrapper(
-      InAppMessageLayoutConfig config,
-      InAppMessage inAppMessage
-  ) {
-    InAppMessageComponent inAppMessageComponent = DaggerInAppMessageComponent.builder()
+      InAppMessageLayoutConfig config, InAppMessage inAppMessage) {
+    InAppMessageComponent inAppMessageComponent =
+        DaggerInAppMessageComponent.builder()
             .inflaterModule(new InflaterModule(inAppMessage, config, application))
             .build();
 
@@ -46,10 +46,9 @@ public class BindingWrapperFactory {
   }
 
   public BindingWrapper createModalBindingWrapper(
-      InAppMessageLayoutConfig config,
-      InAppMessage inAppMessage
-  ) {
-    InAppMessageComponent inAppMessageComponent = DaggerInAppMessageComponent.builder()
+      InAppMessageLayoutConfig config, InAppMessage inAppMessage) {
+    InAppMessageComponent inAppMessageComponent =
+        DaggerInAppMessageComponent.builder()
             .inflaterModule(new InflaterModule(inAppMessage, config, application))
             .build();
 
@@ -57,14 +56,12 @@ public class BindingWrapperFactory {
   }
 
   public BindingWrapper createBannerBindingWrapper(
-      InAppMessageLayoutConfig config,
-      InAppMessage inAppMessage
-  ) {
-    InAppMessageComponent inAppMessageComponent = DaggerInAppMessageComponent.builder()
+      InAppMessageLayoutConfig config, InAppMessage inAppMessage) {
+    InAppMessageComponent inAppMessageComponent =
+        DaggerInAppMessageComponent.builder()
             .inflaterModule(new InflaterModule(inAppMessage, config, application))
             .build();
 
     return inAppMessageComponent.bannerBindingWrapper();
   }
-
 }

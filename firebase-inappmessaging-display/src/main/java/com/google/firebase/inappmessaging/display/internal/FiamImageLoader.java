@@ -30,42 +30,41 @@ import javax.inject.Inject;
 @FirebaseAppScope
 public class FiamImageLoader {
 
-    private final Picasso picasso;
+  private final Picasso picasso;
 
-    @Inject
-    FiamImageLoader(Picasso picasso) {
-        this.picasso = picasso;
+  @Inject
+  FiamImageLoader(Picasso picasso) {
+    this.picasso = picasso;
+  }
+
+  public FiamImageRequestCreator load(@Nullable String imageUrl) {
+    final RequestCreator creator = picasso.load(imageUrl).transform(new CircleTransform());
+    return new FiamImageRequestCreator(creator);
+  }
+
+  public void cancelTag(Class c) {
+    picasso.cancelTag(c);
+  }
+
+  public static class FiamImageRequestCreator {
+    private final RequestCreator mRequestCreator;
+
+    public FiamImageRequestCreator(RequestCreator requestCreator) {
+      mRequestCreator = requestCreator;
     }
 
-    public FiamImageRequestCreator load(@Nullable String imageUrl) {
-        final RequestCreator creator = picasso.load(imageUrl).transform(new CircleTransform());
-        return new FiamImageRequestCreator(creator);
+    public FiamImageRequestCreator placeholder(int placeholderResId) {
+      mRequestCreator.placeholder(placeholderResId);
+      return this;
     }
 
-    public void cancelTag(Class c) {
-        picasso.cancelTag(c);
+    public FiamImageRequestCreator tag(Class c) {
+      mRequestCreator.tag(c);
+      return this;
     }
 
-    public static class FiamImageRequestCreator {
-        private final RequestCreator mRequestCreator;
-
-        public FiamImageRequestCreator(RequestCreator requestCreator) {
-            mRequestCreator = requestCreator;
-        }
-
-        public FiamImageRequestCreator placeholder(int placeholderResId) {
-            mRequestCreator.placeholder(placeholderResId);
-            return this;
-        }
-
-        public FiamImageRequestCreator tag(Class c) {
-            mRequestCreator.tag(c);
-            return this;
-        }
-
-        public void into(ImageView imageView, Callback callback) {
-            mRequestCreator.into(imageView, callback);
-        }
+    public void into(ImageView imageView, Callback callback) {
+      mRequestCreator.into(imageView, callback);
     }
-
+  }
 }

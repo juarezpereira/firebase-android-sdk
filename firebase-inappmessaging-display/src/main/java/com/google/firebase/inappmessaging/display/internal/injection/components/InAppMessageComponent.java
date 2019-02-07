@@ -38,5 +38,4 @@ public interface InAppMessageComponent {
 
   @InAppMessageScope
   BannerBindingWrapper bannerBindingWrapper();
-
 }
